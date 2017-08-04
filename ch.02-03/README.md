@@ -301,7 +301,7 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
         beforeString.len = 4
         console.log(beforeString.len = 4) 
         
-        <!-- 이 단계는 beforeString.len에 4가 담겼다는 것을 console창에 보여주기 위함이다. -->
+        이 단계는 beforeString.len에 4가 담겼다는 것을 console창에 보여주기 위함이다.
     </code>
 </pre>
 
