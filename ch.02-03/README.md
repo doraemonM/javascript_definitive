@@ -178,19 +178,55 @@
 search,replace,match,split인데 그럼 test는 이라고 설명할텐데 regexp(정규식)객체의 메서드이다. 위에는 정규식객체에서 실행시키는 메서드 인자값은 스트링값을 받는다. test하고 exec가 있는데 test는 아까 설명했고 exec는 좀 복잡해서 나중에 정규식에서 다시 보는게 속편하고 이렇게 장황하게 설명해봤자 다 까먹는다.
 
 
-> ####`console.log(yam.get_search())`
+> `console.log(yam.get_search())`
 
-> 1.search값은 객체값에서 정규식패턴을 일치할때 그 일치한 위치를 반환하는 값인데 저기는 숫자한개이상이 매칭되는거니깐 9가 반환된다. 왜냐면  t,e,s,t,i,n,g,: 공백이 9이고 숫자하나와 매칭되는 기준점인 1이 9번째부터라서 그렇다. 이런 골까는 내용을 그냥 저렇게 풀어버리니 3장부터 낙오자가 생길수밖에 없다.
+> 1. search값은 객체값에서 정규식패턴을 일치할때 그 일치한 위치를 반환하는 값인데 저기는 숫자한개이상이 매칭되는거니깐 9가 반환된다. 왜냐면  t,e,s,t,i,n,g,: 공백이 9이고 숫자하나와 매칭되는 기준점인 1이 9번째부터라서 그렇다. 
+
+<pre>
+    <code>          <em>t<sup>1</sup>e<sup>2</sup>s<sup>3</sup>t<sup>4</sup>i<sup>5</sup>n<sup>6</sup>g<sup>7</sup>:<sup>8</sup>1<sup>9</sup></em>
+    </code>
+</pre>
 
 
-> ####`console.log(yam.get_match())`
+> `console.log(yam.get_match())`
 
 > 2. match값은 아까 testing : 1,2,3에서 Number값은 1,2,3밖에 없는데 이 값을 배열로 집어넣어 값을 반환한다. [1,2,3]
 
 
-> ####`console.log(yam.get_replace())`
+> `console.log(yam.get_replace())`
 
-> 3.replace는 잘쓰이는 방식중하난데 여기서는 pattern = 즉숫자로 시작한것을 #으로 바꾸게 해놨는데 testing: #,#,#으로 바뀐다.
+> 3. replace는 잘쓰이는 방식중하난데 여기서는 pattern = 즉숫자로 시작한것을 #으로 바꾸게 해놨는데 testing: #,#,#으로 바뀐다.
+
+
+>`console.log(yam.get_split())`
+
+> 4. text.split은 또 골까게 설명해놨는데 첫번째 인자의 값을 기준으로 매칭되는값만 나누는것인데 배열에 담는다. /\D+/는 숫자와 ASCII문자 빼고 모든값인데 그래서 저기에서 값이 공백하나 1,2,3이 출력되는것이고, 두번째 인지값은 legth지정하는것이다. 1이면 매치되는 첫번째값만 출력이 되어버린다.
+
+<pre>
+    <code>
+            that.get_split = function(){
+                return console.log(text.split(/\D+/), 1) 이런식으로
+            }
+    </code>
+</pre>
+
+
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
