@@ -109,5 +109,77 @@
     </code>
 </pre>
 
->'HI'라고 해서 hi가 HI로 변한게 아니라 toUpperCase를 통해 새로운 문자열로 대문자를 반환한것이라고 생각하면된다.
+>'HI'라고 해서 hi가 HI로 변한게 아니라 toUpperCase를 통해 새로운 문자열로 대문자를 반환한것이라고 생각하면된다. 
+
+
+>### 3.2텍스트
+
+>그냥 참고로 알아두면 정규식의 /^HTML/ 은  첫부분이 HTML으로 시작하는것과 일치
+`[1-9][0-9]` 은 이해하기 어렵게 설명해놨는데 []의 정규식 문법은 대괄호사이에 있는 문자와 매칭 1-9니깐 1부터 9까지 매칭되는 값인데 숫자가 처음에 1에서 9사이에 시작하게 매칭을 해놨으니 0이 아닌 숫자와 일치라고 설명해놨는데 `[채식주의자]` -> 배고플때 고기빼고 먹는사람 이렇게 설명한것이랑 비슷한 설명같다. 
+
+
+>그 다음에 이어지는 아무숫자나 따라온다는뜻은 `[0-9]*`은 정규식에서 *앞에 나오는 패턴은 생략이 가능하거나 그 패턴이 하나이상 나오면 전부다 매칭 숫자가 아무거나 나와도 다 일치하고 안나와도 일치한다.
+
+
+>var text = "testing : 1,2,3" 간단한 문자열이라고 했는데 얼핏보면 :때문에 프로퍼티 정의로 오해할수있는데 그냥 따옴표안에 갖혀있는 장황한 텍스트들이다.
+
+
+> `var pattern = /\d+/g`
+
+>끝에 나오는 g는 글로벌 정의 `\d`는 `[0-9]`와 동일하고 뒤에 +는 +앞에 나오는 패턴은 무조건 하나 이상은 매칭되어야한니 숫자한개이상 나오면 모든 숫자와 일치하게 된다는 뜻이다.
+
+
+>pattern.test(text)
+
+>이제 주목해서 볼건 내가 메소드를 정의하지도 않았는데 pattern객체다음에.으로 시작하고 괄호사이에 뭔 변수값을 넣어서 실행되는거면 내부 메서드라고 보면 된다.
+
+>test는 정규식의 메서드중하나인데 그냥 매칭이 되는게 있으면 무조건 true를 반환하게 되는데 pattern이 아까 숫자하나 이상으로 시작되면 매칭되는거니 text에 1,2,3숫자가 3개나 있으니 당연히 true값을 반환한다.
+
+
+<pre>
+    <code>
+        function reg(spec){
+            var that = {};
+            var text = spec.text;
+            var pattern = spec.pattern || /\d+/g;
+
+            that.get_pattern = function(){
+                return console.log(pattern.test(text))
+            }
+
+            that.get_search = function(){
+                return console.log(text.search(pattern))
+            }
+            that.get_match = function(){
+                return console.log(text.match(pattern))
+            }
+            that.get_replace = function(){
+                return console.log(text.replace(pattern,'#'))
+            }
+            that.get_split = function(){
+                return console.log(text.split(/\D+/))
+            }
+            return that;
+        }
+
+
+        var yam = reg({text:'testing: 1,2,3',pattern:/\d+/g});
+
+        
+        console.log(yam.get_pattern())
+        
+    </code> 
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
 
