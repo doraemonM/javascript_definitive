@@ -302,6 +302,16 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
         console.log(beforeString.len = 4) 
         
         이 단계는 beforeString.len에 4가 담겼다는 것을 console창에 보여주기 위함이다.
+        
+        var afterString = beforeString.len;
+        
+        console.log(afterString)
     </code>
 </pre>
+
+>  위 코드를 실행해 보면 afterString 값은 undefined인데
+> 1. 변수 beforeString에 문자열 test를 정의
+> 2. beforeString에 len이라는 프로퍼티에 4를 정의 하고 임시객체를 회수한다.
+> 3. afterString에 beforeString.len를 호출하는데 beforeString의 len프로퍼티를 참조하기 위해 임시객체를 실행시키지만 len의 값을 정의하지 않았기 때문에 undefined를 호출한다. 위에서 정의한값은 그냥 정의하고 바로 수거되었기때문에 지속되어있지않는다.
+
 
