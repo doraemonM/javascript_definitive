@@ -74,7 +74,7 @@
 >new라는 생성자 함수로 객체를 초기화
 
 >call,apply로 this값을 객체값으로 초기화
-        
+
 >함수의 특정 메소드값으로 호출하여 객체값으로 초기화
 
 >함수 내부의 특정 변수에 객체값을 받아 리턴값으로 변수값을 나타낸뒤에 그값을 받아 초기화 하는 방법이 있다.
@@ -109,13 +109,13 @@
     </code>
 </pre>
 
->'HI'라고 해서 hi가 HI로 변한게 아니라 toUpperCase를 통해 새로운 문자열로 대문자를 반환한것이라고 생각하면된다. 
+>'HI'라고 해서 hi가 HI로 변한게 아니라 toUpperCase를 통해 새로운 문자열로 대문자를 반환한것이라고 생각하면된다.
 
 
 >### 3.2텍스트
 
 >그냥 참고로 알아두면 정규식의 /^HTML/ 은  첫부분이 HTML으로 시작하는것과 일치
-`[1-9][0-9]` 은 이해하기 어렵게 설명해놨는데 []의 정규식 문법은 대괄호사이에 있는 문자와 매칭 1-9니깐 1부터 9까지 매칭되는 값인데 숫자가 처음에 1에서 9사이에 시작하게 매칭을 해놨으니 0이 아닌 숫자와 일치라고 설명해놨는데 `[채식주의자]` -> 배고플때 고기빼고 먹는사람 이렇게 설명한것이랑 비슷한 설명같다. 
+`[1-9][0-9]` 은 이해하기 어렵게 설명해놨는데 []의 정규식 문법은 대괄호사이에 있는 문자와 매칭 1-9니깐 1부터 9까지 매칭되는 값인데 숫자가 처음에 1에서 9사이에 시작하게 매칭을 해놨으니 0이 아닌 숫자와 일치라고 설명해놨는데 `[채식주의자]` -> 배고플때 고기빼고 먹는사람 이렇게 설명한것이랑 비슷한 설명같다.
 
 
 >그 다음에 이어지는 아무숫자나 따라온다는뜻은 `[0-9]*`은 정규식에서 *앞에 나오는 패턴은 생략이 가능하거나 그 패턴이 하나이상 나오면 전부다 매칭 숫자가 아무거나 나와도 다 일치하고 안나와도 일치한다.
@@ -165,9 +165,9 @@
 
         var yam = reg({text:'testing:1,2,3',pattern:/\d+/g});
 
-        
+
         console.log(yam.get_pattern())
-    </code> 
+    </code>
 </pre>
 
 > `text.search(pattern)`
@@ -180,7 +180,7 @@ search,replace,match,split인데 그럼 test는 이라고 설명할텐데 regexp
 
 > `console.log(yam.get_search())`
 
-> 1. search값은 객체값에서 정규식패턴을 일치할때 그 일치한 위치를 반환하는 값인데 저기는 숫자한개이상이 매칭되는거니깐 9가 반환된다. 왜냐면  t,e,s,t,i,n,g,: 공백이 9이고 숫자하나와 매칭되는 기준점인 1이 9번째부터라서 그렇다. 
+> 1. search값은 객체값에서 정규식패턴을 일치할때 그 일치한 위치를 반환하는 값인데 저기는 숫자한개이상이 매칭되는거니깐 9가 반환된다. 왜냐면  t,e,s,t,i,n,g,: 공백이 9이고 숫자하나와 매칭되는 기준점인 1이 9번째부터라서 그렇다.
 
 <pre>
     <code>          <em>t<sup>1</sup>e<sup>2</sup>s<sup>3</sup>t<sup>4</sup>i<sup>5</sup>n<sup>6</sup>g<sup>7</sup>:<sup>8</sup>1<sup>9</sup></em>
@@ -231,7 +231,7 @@ null과 undefined는 조건식에서 true랑 같지 않아서 else값으로 넘�
 </pre>
 
 
-> 불리언 값은 문자열 'true' 혹인 'false'로 변환할 수 있는 toString()메서드를 가지고 있지만 그 밖의 메서드는 가지고 있지않다. 
+> 불리언 값은 문자열 'true' 혹인 'false'로 변환할 수 있는 toString()메서드를 가지고 있지만 그 밖의 메서드는 가지고 있지않다.
 
 > 여기서 또 단순하지 않은 &&와 ||연산자를 진짜 쉽게 설명하고 있다. 4.10에서 자세히 설명한다는데 그냥 여기서 설명 더 자세히 먼저 보고 아래를 클릭하여 살펴보자.
 
@@ -277,7 +277,7 @@ null과 undefined는 조건식에서 true랑 같지 않아서 else값으로 넘�
     <code>
         var s = "hello world!"
         var word = s.substring(s.indexOf('')+1, s.length);
-        
+
         console.log(word)
     </code>
 </pre>
@@ -299,12 +299,12 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
     <code>
         var beforeString = "test";
         beforeString.len = 4
-        console.log(beforeString.len = 4) 
-        
+        console.log(beforeString.len = 4)
+
         이 단계는 beforeString.len에 4가 담겼다는 것을 console창에 보여주기 위함이다.
-        
+
         var afterString = beforeString.len;
-        
+
         console.log(afterString)
     </code>
 </pre>
@@ -317,4 +317,23 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
 >문자열,숫자,불리언의 프로퍼티에 접근하려고 할 때 생성되는 임시객체는 레퍼 객체로 알려져 있는데, 보통 레퍼 객체는 Number또는 Boolean객체에서 String객체와 문자열,숫자 또는 불리언 값을 구별하는 데 필요하다.
 여기서 중요한건 문자열과 숫자,불리언 값의 프로퍼티가 읽기 전용이고, 이 값들에 새로운 프로퍼티를 정의할 수 없는 사실과 이 값들이 객체와는 다르고 레퍼객체로 임시로 참조만 가능하다는 사실을 알면 될것같다.
 
->
+>String()과 Number() 그리고 Boolean()생성자를 사용해 명시적으로 레퍼 객체를 생성할 수있는데 이렇게 사용하는건 좀 복잡스럽고 쓸모가 없는것같다. 아래에서 이유를 설명하자면
+
+
+<pre>
+  <code>
+    var newS = "test";
+    var newN = 1;
+    var newB = true;
+
+    var objectS = new String(newS);
+    var objectN = new Number(newN);
+    var objectB = new Boolean(newB);
+
+
+    console.log(objectS.length);
+    console.log(newS.length);
+    console.log(objectS)
+    console.log(newS)
+  </code>
+</pre>
