@@ -427,3 +427,27 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
 </pre>
 
 >방금의 코드를 통해 보듯이 객체를 변수에 할당하는 것은 단순히 참조를 할당하는것인데 이는 객체의 새로운 복사본을 생성하지 않는다.객체 또는 배열의 새로운 복사본을 만들려면 명시적으로 객체의 프로퍼티 또는 배열의 원소를 복사해야한다.
+
+
+
+<pre>
+  <code>
+     function arrayIsarray(){
+            var that = {};
+            var a = [12,'a','c',55];
+            var b = [];
+            for(var i=0; i < a.length; i++){
+                    b[i] = a[i]
+                }
+                that.firstA = function(){
+                    return a;
+                }
+                that.firstB = function(){
+                    return b;
+                }
+                return that;
+            
+     }
+     
+  </code>
+</pre>
