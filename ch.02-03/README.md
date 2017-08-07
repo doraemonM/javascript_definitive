@@ -445,9 +445,10 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
                 that.firstB = function(){
                     return b;
                 }
-                return that;
-            
+                return that;            
      }
-     
+
+     arrayIsarray()
+
   </code>
 </pre>
