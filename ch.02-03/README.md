@@ -8,7 +8,7 @@
 > 정규식,특수문자쓸때 필요하다.
 
 
-> 지금 쓰는 `//` 한줄 주석
+> 지금 쓰는 `>` 한줄 주석
 
 > HTML 태그 안에서는 `<!-- -->`을 사용한다.
 
@@ -448,7 +448,70 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
                 return that;            
      }
 
-     arrayIsarray()
+     arrayIsarray();
 
   </code>
 </pre>
+
+
+>비슷하게， 두 다른 객체 또는 배 열을 서로 비교하고 싶다면 그들의 프로퍼티 또는 원소를 비교해야 한다. 다음은 두 배 열을 비교하는 함수를 정의한다.
+
+<pre>
+  <code>
+    function equalArrays(a , b) {
+        if (a.length != b.length) return false;  
+        크기가 다른 배열은 같지 않다
+        for(var i = 0; i < a.length; i++)  
+        모든 원소를 순회한다
+        if (a[i] !== b[i]) return false;  
+        일부 원소가 서로 다르다면， 두배열은같지않다
+      return true;
+     }
+
+
+    var arrayVS = arrayIsarray();
+    console.log(equalArrays(arrayVS.firstA() , arrayVS.firstB()));
+
+  </code>
+</pre>
+
+>### 3.8타입변환
+
+>자바스크립트는 타입에 대해 매우 유연하다. 불리언에서 이런 점에 대해 살펴보았는데 자바스크립트가 불리언 값을 기대할 때, 여러분은 어떤 타입의 값이든 전달할 수 있고, 자바스크립트는 그 값을 필요에 따라 변환할 것이다. 어떤값('참으로 판정되는 값'')은 true로 변환하고 다른값('거짓'으로 판정되는 값들은 false)로 변환한다.
+
+
+<pre>
+  <code>
+    function nan(){
+        var n = 1 - "x";
+        var m = 1 + "x";
+        var c = "x" + 1;
+        var v = "x" - 1;
+        var str = "xs" - "x";
+        var nan = n + "object"
+
+        console.log(n)
+        console.log(m)
+        console.log(c)
+        console.log(v)            
+        console.log(str)
+        console.log(typeof str)
+        console.log(nan)
+        console.log(typeof nan)
+    }
+
+    nan();
+
+  </code>
+</pre>
+
+
+>위에서 확인해봤듯이 -연산은 숫자가 우선이고
+>+연산은 문자열이 우선인걸 확인할수있다.
+>+연산은 문자가 나오면 숫자도 문자열로 합친다.
+>-연산은 무조건 숫자연산으로 문자열끼리 빼도 Nan을 반환한다.
+>그래서 nan값이 Nan값과 문자열을 합치면 "NaN objects"를 반환하는것이
+NaN의 typeof 값이 넘버이기 때문이다.
+
+>표3-2는 다시한번 천천히 잘 정독해보는게 좋을것같다.
+>여기에서의 핵심은 타입변환이 자유롭고 변환후에 무엇으로 반환되는지 잘 알아보는게 중요하다. 그래서 위에서 원시타입에서 객체로의 변환을 설명하는 레퍼객체의 예제에서도 살펴볼수있다. 하지만 객체가 올자리에 null과 undefined를 사용하면 변환을 수행하는 대신 TypeE1Tor 예 외가 발생한다. 그리고 객체에서 원시 타입으로의 변환은 다소 복잡하다.
