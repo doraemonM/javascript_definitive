@@ -1,4 +1,4 @@
-# 코어측 자바스크립트
+-# 코어측 자바스크립트
 
 ## 2장 어휘구조.
 
@@ -390,6 +390,7 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
 
 >객체는 값으로 비교되지 않는데 두 객체가 같은 프로퍼티와 값을 가지고 있어도 두 객체는 같지 않다. 같은 순서로 같은 원소를 갖고 있어도 같은 객체가 아니다.
 
+>#### neqObject
 
 <pre>
   <code>
@@ -515,3 +516,374 @@ s.substring()을 참조하게 된다면 s는 새로운 문자열을 갖는 객�
 
 >표3-2는 다시한번 천천히 잘 정독해보는게 좋을것같다.
 >여기에서의 핵심은 타입변환이 자유롭고 변환후에 무엇으로 반환되는지 잘 알아보는게 중요하다. 그래서 위에서 원시타입에서 객체로의 변환을 설명하는 레퍼객체의 예제에서도 살펴볼수있다. 하지만 객체가 올자리에 null과 undefined를 사용하면 변환을 수행하는 대신 TypeE1Tor 예 외가 발생한다. 그리고 객체에서 원시 타입으로의 변환은 다소 복잡하다.
+
+>### 3.8.1 변환과 동등비교
+
+>자바스크립트는 값의 타입을 유연하게 변환 시킬수있고 == 연산자를 사용해 값이 동등한지에 대한 판단도 손쉽게 할 수 있다.
+
+>4.9.1절에는 두값이 동등한지 판단하기 위해 == 연산자가 수행하는 타입 변환 과정을 설명한다.
+
+>위에서 false와 undefined가 같지 않다고 설명했듯이 불리언값이 올자리에 사용되면 false로 변환하지만 그자체가 false값은 아니다. ==연산자는 피연산자를 불리언으로 변환하지않기때문이다. 그래서 !연산자가 있는것이다!
+
+
+
+<pre>
+  <code>
+    function ifwhy(){        
+       if(!!undefined == false) console.log('hi')
+    }
+
+    ifwhy()
+
+  </code>
+</pre>
+
+>### 3.8.2 명시적변환
+
+>자바스크립트가 많은 타입의 전환을 자동으로 수행하더라도, 때때로 명시적 변환이 필요할지 모른다. 그리고 코드를 깔끔하게 유지하기 위해 변환을 명시적으로 하는것을 더 선호할 수도 있다.
+
+<pre>
+  <code>
+      function objectNew(){
+          var num3 = Number('3');
+          var stringF = String(false);
+          var obj = Object();
+
+
+          console.log(num3)
+          console.log(stringF)
+          console.log(obj.toString())
+      }
+
+      objectNew();
+  </code>
+</pre>
+
+
+>null과 undefined를 제외한 모든 값은 toString()메서드를 가지고 있으며 Object()함수는 이런 경우에 예외를 발생시키지 않고 새로 생성된 빈객체를 반환한다. .
+
+>* 특정 자바스크립트 연산자는 암시적 타입변환을 수행하는데
+>* 위에서 말했듯이 +는 문자열이있음 문자열중심
+>* -는 문자도 숫자로 바꾸고 -x같다. 저 아래 예시는
+>* !!x는 위에서 설명했듯이 !값은 자신의 값은 반대로 Boolean값으로 바꾼다.
+
+>Number클래스 toString()메서드는 인자값으로 진수로 변환하는값을 가진다.
+
+>아래 나오는것들은 흥미가 있으면 따로 읽어보는것이 좋겠다. parseInt()나 parseFloat()자주 쓰이니 정독정도는 아니더래도 읽어보자
+
+>### 3.8.3 객체에서 원시 타입으로 변환
+
+>객체에서 불리언으로 의 변환은 간단하다. 모든 객체(배열과 함수를 포함한는)true로 변환된다. 이는 레퍼 객체도 동일하게 적용된다.
+
+>헷갈리게 적어놓은게 있는데 new Boolean(false)는 원시 타입이 아니라 객체이므로 true로 변환된다란 말은
+
+<pre>
+  <code>
+      function whatOb(){
+          var x = new Boolean(false);            
+          if(x == true){console.log('x의 값이 트루값이란 이야기가 아니야')}
+          else if(x){console.log('x가 참값으로 판단한다는 이야기지')}
+      }
+
+      whatOb();
+  </code>
+</pre>
+
+>위에서 계속 설명한  개념이 안잡히면 뭔소리인지 모를것이다. 말그대로 new Boolean(false)는 false값을 가지고 있는 생성자 함수인데 이 오브젝트는 원시값 그냥 false를 반환하는 1차원적인 값이 아니라 false를 담고있는 새로운 객체인데 이 객체값이 있는지 없는지를 판단하는것값이 true란 이야기로 해석을 하면 될것같다.
+
+>객체에서 문자열로 그리고 객체에서 숫자로의 변환은 변환될 객체의 메서드를 호출함으로써 수행된다. 프로퍼티도 호출하면 된다. [neqObject 참고](./ch.02-3/README.md#neqObject) 앞 링크를 참고하자
+
+>이는 자바스크립트 객체가 변환을 수행하는 두개의 서로다른 메서드를 가지고 있기 때문에 변환 과정이 다소 복잡하다. 그리고 다음과 같은 특별한 경우에도 변환 과정이 다소 복잡하다. 이번 절에서 설명한 문자열과 숫자로의 전환 규칙은 오직 네이티브 객체에만 적용가능하고 호스트 객체들은 그 자체 알고리즘에 따라 숫자와 문자열도 가능하다.
+
+<pre>
+  <code>
+      function nativeObj(){
+          var that = {};
+          that.native1 = function(){
+              for(obj in window){
+                  console.log(obj)
+              }
+          }    
+          that.native2 = function(){
+              for(obj in window.document){
+                  console.log(obj)
+              }
+          }
+          return that;
+      }        
+
+
+      var nativeObjs = nativeObj();
+
+      console.log(nativeObjs.native1())
+      console.log(nativeObjs.native2())
+  </code>
+</pre>
+
+
+>코드를 실행해 보면， 호스트 객체만 보이고 네이티브 자바스크립트 객체는 보이지 않는 것을 알 수 있다. 브라우저에서 이런 식으로 호스트 객체와 네이티브 객체를 구분하는 것을보기란 어렵지 않다. 웹 브라우저와 관련 있는 가장 유명한 호스트 객체는 HTML 문서와 동작하는 인터페이스로서 보통은 DOM으로 많이 알려져 있는 것이다.
+
+
+>모든 객체는 두개의 타입 변환 메서드를 상속하는데 첫 번째 메서드는 toString()인데 이 메서드는 객체가 나타내는 정보를 문자열로 반환한다. 내장된 toString()메서드는 그리 유용한 정보를 제공하지 않는다.(하지만 6-4에서 그 유용함에 대해 살펴본다 한다.)
+
+
+<pre>
+  <code>
+      6.4에서 나오는 classof함수
+
+      var objectN = new Number(newN);
+
+      function arrayIsarray(){
+          var that = {};
+          var a = [12,'a','c',55];
+          var b = [];
+          for(var i=0; i < a.length; i++){
+              b[i] = a[i]
+          }
+          that.firstA = function(){
+              return a;
+          }
+          that.firstB = function(){
+              return b;
+          }
+          return that;
+      }
+
+      var arrayVS = arrayIsarray();
+
+      function nativeObj(){
+          var that = {};
+          that.native1 = function(){
+              for(obj in window){
+                  console.log(obj)
+              }
+          }    
+          that.native2 = function(){
+              for(obj in window.document){
+                  console.log(obj)
+              }
+          }
+          return that;
+      }        
+
+
+      var nativeObjs = nativeObj();
+
+      function classof(o) {
+          if (0 === null) return "Null";
+          if (0 === undefined) return "Undefined";
+          return Object.prototype.toString.call(o).slice(8,-1);
+
+          네이티브 객체 object의 프로토타입의 toString메서드를 call함수로 자신의 값으로 this를 받아서 8번째로 시작하는 [object <-앞에 붙은 8자리 빼고 마지막 ]이부분을 삭제해서 객체의 현재값을 알아 볼수있다.           
+       }
+
+
+        console.log(classof(nativeObjs));
+        빈객체에 that값을 반환하는 함수에 할당하는 값이기 때문에 객체임 반환하는값없음 undefined나올거임
+
+        console.log(classof(objectN));
+        Number 위에서 찾아보면 new Number로 정의된값
+
+        console.log(classof(nativeObj));
+        - function         
+        console.log(classof(arrayVS.firstA()));
+        - array
+  </code>
+</pre>
+
+>다른 객체 변환 함수는 valueOf()라고 불리우는데 이 메서드는 자세히 정의 되어있지않다. 만약 객체를 표현하는 원시 타입이 있다면 valueOf()는 객체를 원시 타입으로 변환하려고 할 것이다. 객체는 결합된 값이고 대부분의 객체는 하나의 원시 타입으로 표현할 수 없기 때문에, 기본적으로 valueOf() 메서드는 원시 타입을 반환하지 않고 단순히 객체 그 자신을 반환한다.
+
+<pre>
+  <code>
+      function valueOfs(){
+          var that = {};
+          var o = {x : 1, y:"안녕하시오",dd:undefined}
+
+          that.valtoStr = function(){
+              console.log(o.valueOf()+1);
+              console.log(o.x+1);
+              console.log(o.y+1);
+              if(o.x.valueOf() > 0){console.log('하이')}
+              console.log(o.dd.valueOf());
+
+          }
+          that.toStr = function(){
+              return true;
+          }
+          that.values = function(){
+              return false;
+          }
+          that.nums = function(){
+              return 1;
+          }
+          that.obw = function(){
+              var nums = new Number(3);
+              var strings = new String('겔겔겔');
+              var now = new Date();
+
+              console.log(typeof(nums+1))
+              console.log(typeof(nums-1))
+              console.log(nums == nums.toString())
+              console.log(nums > (nums-1));
+
+
+
+              console.log(typeof(strings+1))
+              console.log(typeof(strings-1))
+              console.log(strings == strings.toString())
+              console.log(strings > (strings-1));
+
+
+              console.log(typeof(now+1))
+              console.log(typeof(now-1))
+              console.log(now == now.toString())
+              console.log(now > (now-1));
+          }
+
+          return that
+
+
+      }
+
+      var obto = valueOfs();
+
+      obto.valtoStr()
+      console.log(obto.toStr().toString())
+      console.log(typeof obto.toStr().toString())
+      console.log(obto.values().valueOf())
+      console.log(typeof obto.values().valueOf())
+
+      obto.obw()
+  </code>
+</pre>
+
+
+>지금껏 설명한 valueOf는 설명을 안하다 시피했으면서 설명을 했다니 위에 살짝 봤을때 객체에서 문자열로 바뀌는거랑 숫자열로 바뀌는거랑 약간 다른 형태로 보이는데 위에 콘솔까보면서 책이랑 읽으면서 이해하면 될것같다.
+
+
+>자바스크립트에서 +연산자는 숫자 덧셈과 문자열 붙이기를 수행하는데 + 연산자의 피연산자가 객체라면 객체에서 숫자로 변환하는대신 객체에서 원시 타입으로 변환한다. obto.valtoStr()참고
+
+>Date객체는 숫자와 문자열 상호변환 가능하며 객체에서 문자열로의 변환은 Date객체에 한해 toString()메서드를 먼저 사용한다.
+
+>값이 변환될때 Date같은객체 빼고는 valueOf()를 먼저 사용한 후 toString()을 사용한다. 그 값은 숫자나 문자열로 추가 변환없이 바로 사용한다. 먼소리냐면 그냥 객체가 1의 값을 받았다고 해도 number로 변환하지않고 그냥 object1로 연산을 실행한다는 소리같다.
+
+>근데 +나 == !-이런 연산자들은 값의 비교를 위해 문자열에서 원시타입으로의 전환을 수행하고 아래 함수는 number와 string과 date의 상호작용을 보여준다.
+
+>### 3.9 변수선언
+
+>자바스크립트에서 변수를 사용하기 전에 변수 선언을 해야한다. 변수는 다음과 같이 var키워드를 이용하여 선언한다.
+다 알고 있지만 var구문에서 변수에 초기값을 지정하지 않으면 변수는 값이 설정될 때 까지 undefined값을 갖게된다. var는 for와 for in문 안에 올수있다. 자바스크립트 변수선언은 타입을 명시하지않아 원시값 함수 객체든 다 담을수있다.
+
+>### 3.10 변수의 유효범위
+
+>변수의 유효범위는 변수가 정의되어 있는 영역을 말한다. 지금 이글을 쓰면서도 전역변수를 가급적 정의안하려고 했는데 몇개 정의해놨는데 지금 까마득히 아래에 있는 이 상태에서도 불러올수있다.
+함수의 매개변수도 지역변수 함수안에서 선언된 변수는 함수내부에서만 유효한 변수이다.
+지금 선언한것들은 위에 예제를 통해 자연스럽게 설명이 된것같다.
+
+<pre>
+  <code>
+      function hois(o){
+          var i = 0;
+          //console.log(j);          
+          if(typeof o == "object"){ //객체o를 동등연산자로 오른쪽 string과 비교하여 원시값으로 바뀌었다.
+              var j = 'j입니다.';
+              for(var k=0; k <10; k++){
+                  console.log(k)
+              }
+              console.log(k);
+          }            
+          console.log(j);
+      }
+
+      console.log(hois(new Object()))
+  </code>
+</pre>
+
+
+>예제가 열라 헷갈리게 써놨는데 저게 i는 hois함수몸체 최상단 그다음에 j는 if몸체안 var k는 for문에서 초기화되는값인데 이값은 전체다  함수내부스페이스에서 최상단에 정의된다.
+
+>### 3.10.2 프로퍼티로서의 변수
+
+>여러분이 전역 자바스크립트 변수를 선언할때 실제로는 전역 객체의 프로퍼티를 정의하는것이다. 라고 참 어렵게 써놨다.
+자바스크립트는 this키워드로 전역객체를 참조 할수 있도록 한다 하지만 지역 변수가 저장된 객체를 참조할 다른 방법은 꼼수를 써야하겠다. 뭐 나중에 나올것이다.
+
+
+>### 3.10.3 유효범위체인
+자바스크립트는 언어적으로 유효범위를 가지고 있는 언어이고 변수의 유효범위란 변수가 정의된 block범위라고 생각할수있다. 전역변수는 프로그램 전체에 걸쳐 정의되고 지역변수는 변수가 선언된 함수내에서 전체에 걸쳐 정의되는데
+
+
+<pre>
+  <code>
+          ------------------윈도우 전역객체 네임스페이스-------------------------
+
+              var s = 1; --네임스페이스안에서 유효
+
+                          --------
+                              function ss(){
+                                  var k = 0; -----여기서만 유효
+
+                                  여기서도 s가 유효
+
+
+
+
+                               }
+                          ----------------
+
+
+                           --------
+                              function ss2(){
+                                  var k = 0; -----여기서만 유효
+                                  var s = 0; -----s는 이 네임스페이스에서 ss2의 s는 0으로 초기화
+
+
+                               }
+                          ----------------
+
+          여기서도 s
+
+
+          ------------------윈도우 전역객체 네임스페이스-------------------------
+  </code>
+</pre>
+
+
+<pre>
+  <code>
+      var abcdefg = 3;
+
+      function xxxx(){
+
+          var k = 2;
+
+          return console.log(k+abcdefg);
+      }
+
+       function xxxx2(){
+
+          var k = 3;
+          var abcdefg = 5;
+
+          return console.log(k+abcdefg);
+      }
+
+      xxxx();
+      xxxx2();
+  </code>
+</pre>
+
+>+ 내가 이 일련의 과정을 이해한과정은
+>+ window.abcdefg = 3;
+>+ window.xxxx().k = 2;
+>+ 둘은 +연산으로 5의 값을 반환
+
+>+ 아래에서는
+>+ (window.xxxx2().k) = 3;
+
+>+ window.xxxx2()함수안에서 abcdefg를 정의
+>+ abcdefg프로퍼티는 xxxx2의 프로퍼티 호출로 인해
+>+ window.abcdefg = 3;
+>+ (window.xxxx2()).abcdefg= 5;  
+>+ 이런식으로 값이 반환되는것같다.
+
+>+ 전역스페이스에서 지정한 var abcdefg = 3;
